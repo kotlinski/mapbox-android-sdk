@@ -67,6 +67,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     private boolean firstMarker = true;
 
+    private TooltipView tooltipView;
+
     public final static String EXAMPLE_MAP_ID = "examples.map-z2effxa8";
 
     //////////////////
@@ -89,6 +91,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         if(mapboxID!=null){
             setURL(mapboxID);
         }
+        tooltipView = new TooltipView(context, this);
     }
 
     /**
@@ -264,6 +267,10 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
 
     }
 
+    public void displaceTooltip(Marker marker) {
+
+    }
+
     /**
      * Class that generates markers from formats such as GeoJSON
      */
@@ -314,9 +321,8 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                 {
                     Marker currentMarker;
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        ((Marker)(item)).setTooltipVisible();
-
-
+                        //((Marker)(item)).setTooltipVisible();
+                        tooltipView.reconfigure(((Marker)(item)).getPoint(), ((Marker)(item)).getTitle());
                         return true;
                     }
                     public boolean onItemLongPress(final int index, final OverlayItem item) {

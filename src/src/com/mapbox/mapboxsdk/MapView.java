@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.widget.AdapterView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -313,17 +314,20 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     private void setDefaultItemizedOverlay() {
         defaultMarkerOverlay = new ItemizedIconOverlay<OverlayItem>(
                 defaultMarkerList,
-                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>()
+                {
                     Marker currentMarker;
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
                         ((Marker)(item)).setTooltipVisible();
+
 
                         return true;
                     }
                     public boolean onItemLongPress(final int index, final OverlayItem item) {
                         return true;
                     }
-                }, new DefaultResourceProxyImpl(context.getApplicationContext()));
+                }
+                , new DefaultResourceProxyImpl(context.getApplicationContext()));
         this.getOverlays().add(defaultMarkerOverlay);
     }
 

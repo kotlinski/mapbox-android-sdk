@@ -146,10 +146,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         final MapTileProviderBasic tileProvider = (MapTileProviderBasic) this.getTileProvider();
         final ITileSource tileSource = new XYTileSource(name, null, 1, 16, 256, ".png", URL);
         tileProvider.setTileSource(tileSource);
-        final TilesOverlay tilesOverlay = new TilesOverlay(tileProvider, context);
-        tilesOverlay.setLoadingBackgroundColor(Color.TRANSPARENT);
-        this.getOverlays().clear();
-        this.getOverlays().add(tilesOverlay);
         this.getController().animateTo(this.getMapCenter()); // This clears tiles (for some reason)
         this.invalidate();
     }

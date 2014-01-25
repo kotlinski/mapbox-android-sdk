@@ -131,6 +131,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
     public void removeLayer(String identifier){
 
     }
+
     @Deprecated
     public void addLayer(String name){
         this.switchToLayer(name);
@@ -153,6 +154,11 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         this.invalidate();
     }
 
+    @Override
+    public void setMultiTouchControls(boolean yesOrNo){
+        super.setMultiTouchControls(yesOrNo);
+    }
+
 
 
     /////////////////////
@@ -167,7 +173,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      **/
     private String parseURL(String url) {
         if(url.contains(".json")) return getURLFromTileJSON(url);
-        if(!url.contains("http://")) return getURLFromMapBoxID(url);
+        if(!url.contains("http://") && !url.contains("https://")) return getURLFromMapBoxID(url);
         if(url.contains(".png")) return getURLFromImageTemplate(url);
         else{
             throw new IllegalArgumentException("You need to enter either a valid URL, a MapBox id, or a tile URL template");
@@ -204,7 +210,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         if(!mapBoxID.contains(".")){
             throw new IllegalArgumentException("Invalid MapBox ID, entered "+mapBoxID);
         }
-        String completeURL = "http://a.tiles.mapbox.com/v3/"+mapBoxID+"/";
+        String completeURL = "https://a.tiles.mapbox.com/v3/"+mapBoxID+"/";
         return completeURL;
     }
 
@@ -337,7 +343,6 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
                     MapView.this.addMarker(lat, lon, title, "");
                 }
                 else if (type.equals("LineString")){
-                    System.out.println("Creating LineString");
                     PathOverlay path = new PathOverlay(Color.BLACK,context);
                     JSONArray points = (JSONArray) geometry.get("coordinates");
                     JSONArray coordinates;

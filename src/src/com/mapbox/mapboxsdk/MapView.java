@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import com.mapbox.mapboxforandroid.utils.Chrono;
 import com.testflightapp.lib.core.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,6 +77,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
      */
     public MapView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        double time = System.nanoTime();
         this.context = context;
         setURL(EXAMPLE_MAP_ID);
         eventsOverlay = new MapEventsOverlay(context, this);
@@ -85,6 +87,7 @@ public class MapView extends org.osmdroid.views.MapView implements MapEventsRece
         if(mapboxID!=null){
             setURL(mapboxID);
         }
+        Chrono.track("MapBox MapView init (not super)", time);
     }
 
     /**

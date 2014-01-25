@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import com.mapbox.mapboxforandroid.utils.Chrono;
 import com.mapbox.mapboxsdk.MapView;
 import com.testflightapp.lib.TestFlight;
 import org.osmdroid.api.IMapController;
@@ -16,6 +17,9 @@ import org.osmdroid.tileprovider.MapTileProviderBasic;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.PathOverlay;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
+
+import java.util.Date;
+import java.util.logging.Logger;
 
 public class MainActivity extends Activity {
 	private IMapController mapController;
@@ -35,7 +39,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         TestFlight.takeOff(getApplication(), "b1425515-299c-4aaf-b85e-b9a7c99b0fa5");
+        double thisTime = System.nanoTime();
         setContentView(R.layout.activity_main);
+        Chrono.track("setContentView",thisTime);
         mv = (MapView)findViewById(R.id.mapview);
         mapController = mv.getController();
         mapController.setCenter(startingPoint);

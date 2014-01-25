@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import android.util.DisplayMetrics;
 import android.view.*;
+import com.mapbox.mapboxforandroid.utils.Chrono;
 import org.metalev.multitouch.controller.MultiTouchController;
 import org.metalev.multitouch.controller.MultiTouchController.MultiTouchObjectCanvas;
 import org.metalev.multitouch.controller.MultiTouchController.PointInfo;
